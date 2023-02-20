@@ -1,6 +1,7 @@
 import express from "express";
 import morgan from "morgan";
 import { PORT } from "./config.js";
+import cors from "cors";
 
 import "./database.js";
 
@@ -8,6 +9,8 @@ import "./database.js";
 import indexVehicles from "./Routes/vehicle.routes.js";
 
 const app = express();
+
+app.use(cors());
 
 app.use(express.json());
 
