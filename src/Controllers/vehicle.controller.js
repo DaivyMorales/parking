@@ -1,12 +1,18 @@
 import Vehicle from "../Models/Vehicle.js";
 
 export const createVehicles = async (req, res) => {
-  const { plates, product } = req.body;
+  const { plates, name, lastName, product, timeOff } = req.body;
 
   console.log(req.body);
 
   //Create a new Vehicle
-  const newVehicle = new Vehicle({ plates, product });
+  const newVehicle = new Vehicle({
+    plates,
+    name,
+    lastName,
+    product,
+    timeOff,
+  });
 
   const vehicleSaved = await newVehicle.save();
 
