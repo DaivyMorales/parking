@@ -1,20 +1,17 @@
-import { useEffect, useState } from "react";
-import { getVehicles } from "../api/vehicle.api";
+import { useContext, useEffect, useState } from "react";
+import { getVehiclesRequest } from "../api/vehicle.api";
+import { CompanyContext } from "../Context/CompanyContextProvider";
 
 import { Vehicle } from "./Vehicle";
 
 export const ListParking = () => {
-  const [vehicle, setVehicle] = useState([]);
+  const { vehicles, setVehicles, loadVehicles } = useContext(CompanyContext);
 
   useEffect(() => {
-    const loadVehicle = async () => {
-      const response = await getVehicles();
-      setVehicle(response.data);
-    };
-    loadVehicle();
+    loadVehicles();
   }, []);
 
-  console.log(vehicle);
+  console.log(vehicles);
   return (
     <div className="w-screen h-screen flex justify-center items-center">
       <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
@@ -50,7 +47,7 @@ export const ListParking = () => {
             </tr>
           </thead>
           <tbody>
-            {vehicle.map((vehicle, index) => (
+            {vehicles.map((vehicle, index) => (
               <Vehicle vehicle={vehicle} key={index} />
             ))}
           </tbody>

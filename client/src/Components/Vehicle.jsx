@@ -1,7 +1,9 @@
-import { Button } from "flowbite-react";
-import { useState } from "react";
+import { useContext, useState } from "react";
+import { CompanyContext } from "../Context/CompanyContextProvider";
 
 export const Vehicle = ({ vehicle }) => {
+  const { deleteVehicle } = useContext(CompanyContext);
+
   const [date, setDate] = useState(new Date(vehicle.updatedAt));
 
   const hour = date.getHours();
@@ -25,6 +27,7 @@ export const Vehicle = ({ vehicle }) => {
       <td className="px-6 py-4">{showTime}</td>
       <td className="px-6 py-4 text-right">
         <a
+          onClick={() => deleteVehicle(vehicle._id)}
           href="#"
           className="font-medium text-red-600 dark:text-blue-500 hover:underline"
         >
