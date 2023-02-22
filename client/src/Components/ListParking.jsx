@@ -19,6 +19,7 @@ export const ListParking = () => {
   const showForm = {
     display: "grid",
     gridTemplateColumns: "repeat(3, minmax(0, 1fr))",
+    columnGap: "0.25rem" /* 36px */,
   };
 
   // const withoutForm = {
@@ -27,8 +28,8 @@ export const ListParking = () => {
   // };
 
   return (
-    <div className="w-screen h-screen flex justify-center items-center px-10">
-      <div style={showForm}>
+    <div className="w-screen  flex justify-center items-center px-10">
+      <div style={showForm} className="flex justify-center items-center">
         <div
           style={
             form
@@ -78,6 +79,9 @@ export const ListParking = () => {
                   HORA DE ENTRADA
                 </th>
                 <th scope="col" className="px-6 py-3">
+                  DURACION
+                </th>
+                <th scope="col" className="px-6 py-3">
                   <span className="sr-only">Edit</span>
                 </th>
               </tr>
@@ -89,7 +93,7 @@ export const ListParking = () => {
             </tbody>
           </table>
         </div>
-        <div>{form ? <Outlet /> : ""}</div>
+        <div className=" p-1">{form ? <Outlet /> : ""}</div>
       </div>
     </div>
   );

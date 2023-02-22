@@ -30,7 +30,7 @@ export const getVehicle = async (req, res) => {
 };
 
 export const updateVehicles = async (req, res) => {
-  const updatedVehicle = await Vehicle.findByIdAndUpdate(
+  const vehicles = await Vehicle.findByIdAndUpdate(
     req.params.vehicleId,
     req.body,
     {
@@ -38,7 +38,7 @@ export const updateVehicles = async (req, res) => {
     } //Here, this give me the vehicle new( edited ), It don't give me the old vehicle
   );
 
-  res.status(204).json(updatedVehicle);
+  res.status(200).json(vehicles);
 };
 
 export const deleteVehicles = async (req, res) => {

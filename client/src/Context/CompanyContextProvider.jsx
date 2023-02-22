@@ -4,6 +4,7 @@ import {
   deleteVehicleRequest,
   createVehicleRequest,
   getVehicleRequest,
+  updateVehicleRequest,
 } from "../api/vehicle.api";
 
 export const CompanyContext = createContext();
@@ -35,6 +36,13 @@ export const CompanyContextProvider = ({ children }) => {
     return response.data;
   };
 
+  const updateVehicles = async (idVehicle, newVehicle) => {
+    const response = await updateVehicleRequest(idVehicle, newVehicle);
+    setVehicles(vehicles.filter((vehicle) => vehicle._id !== idVehicle));
+    setVehicles([...vehicles, response.data]);
+    // console.log("Update", response.data.updatedAt !==);
+  };
+
   return (
     <CompanyContext.Provider
       value={{
@@ -46,6 +54,7 @@ export const CompanyContextProvider = ({ children }) => {
         setForm,
         createVehicle,
         loadVehicle,
+        updateVehicles,
       }}
     >
       {children}

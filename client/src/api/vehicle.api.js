@@ -11,3 +11,6 @@ export const createVehicleRequest = async (vehicle) =>
 
 export const getVehicleRequest = async (idVehicle) =>
   await axios.get(`http://localhost:4000/vehicles/${idVehicle}`);
+
+export const updateVehicleRequest = async (id, newFields) =>
+  await axios.put(`http://localhost:4000/vehicles/${id}`, newFields);
