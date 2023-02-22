@@ -1,11 +1,16 @@
 import { useContext, useEffect, useState } from "react";
-import { Outlet } from "react-router-dom";
+import { Outlet, useNavigate, useParams } from "react-router-dom";
 import { CompanyContext } from "../Context/CompanyContextProvider";
 
 import { Vehicle } from "./Vehicle";
 
 export const ListParking = () => {
-  const { vehicles, form, loadVehicles } = useContext(CompanyContext);
+  const navigate = useNavigate();
+  const params = useParams();
+
+  // console.log(params)
+
+  const { vehicles, form, setForm, loadVehicles } = useContext(CompanyContext);
 
   useEffect(() => {
     loadVehicles();
@@ -21,7 +26,6 @@ export const ListParking = () => {
   //   gridTemplateColumns: "repeat(1, minmax(0, 1fr))",
   // };
 
-  console.log(vehicles);
   return (
     <div className="w-screen h-screen flex justify-center items-center px-10">
       <div style={showForm}>
@@ -41,6 +45,20 @@ export const ListParking = () => {
                 play, stay organized, get answers, keep in touch, grow your
                 business, and more.
               </p>
+              <button
+                onClick={() => {
+                  setForm(!form);
+
+                  if (form) {
+                    navigate("/list");
+                  } else {
+                    navigate("/list/form");
+                  }
+                }}
+                className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-3 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+              >
+                Crear
+              </button>
             </caption>
             <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
               <tr>

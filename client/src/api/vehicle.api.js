@@ -8,3 +8,6 @@ export const deleteVehicleRequest = async (idVehicle) =>
 
 export const createVehicleRequest = async (vehicle) =>
   await axios.post("http://localhost:4000/vehicles", vehicle);
+
+export const getVehicleRequest = async (idVehicle) =>
+  await axios.get(`http://localhost:4000/vehicles/${idVehicle}`);

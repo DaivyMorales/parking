@@ -1,7 +1,10 @@
-import { useContext, useState } from "react";
+import { Children, useContext, useState } from "react";
 import { CompanyContext } from "../Context/CompanyContextProvider";
+import { useNavigate } from "react-router-dom";
 
 export const Vehicle = ({ vehicle }) => {
+  const navigate = useNavigate();
+
   const { deleteVehicle, setForm, form } = useContext(CompanyContext);
 
   const [date, setDate] = useState(new Date(vehicle.createdAt));
@@ -40,7 +43,15 @@ export const Vehicle = ({ vehicle }) => {
         </a>
         <br />
         <a
-          onClick={() => setForm(!form)}
+          onClick={() => {
+            setForm(!form);
+            if (form) {
+              navigate("/list");
+            } else {
+              navigate(`/list/edit/${vehicle._id}`);
+              // console.log(vehicle._id);
+            }
+          }}
           href="#"
           className="font-medium text-blue-600 dark:text-blue-500 hover:underline"
         >

@@ -3,6 +3,7 @@ import {
   getVehiclesRequest,
   deleteVehicleRequest,
   createVehicleRequest,
+  getVehicleRequest,
 } from "../api/vehicle.api";
 
 export const CompanyContext = createContext();
@@ -28,6 +29,12 @@ export const CompanyContextProvider = ({ children }) => {
     console.log(response.data);
   };
 
+  const loadVehicle = async (idVehicle) => {
+    const response = await getVehicleRequest(idVehicle);
+    console.log(response);
+    return response.data;
+  };
+
   return (
     <CompanyContext.Provider
       value={{
@@ -38,6 +45,7 @@ export const CompanyContextProvider = ({ children }) => {
         form,
         setForm,
         createVehicle,
+        loadVehicle,
       }}
     >
       {children}
