@@ -46,3 +46,14 @@ export const deleteVehicles = async (req, res) => {
   await Vehicle.findByIdAndDelete(vehicleId);
   res.status(200).json();
 };
+
+export const productFilter = async (req, res) => {
+  try {
+    const vehicle = await Vehicle.find({
+      product: req.params.vehicleProduct,
+    });
+    res.status(200).json(vehicle);
+  } catch (error) {
+    res.status(500).json({ message: error });
+  }
+};
