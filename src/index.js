@@ -10,6 +10,8 @@ import indexVehicles from "./Routes/vehicle.routes.js";
 
 const app = express();
 
+const port = process.env.PORT || 3000;
+
 app.use(cors());
 
 app.use(express.json());
@@ -18,5 +20,5 @@ app.use("/vehicles", indexVehicles);
 
 app.use(morgan("dev"));
 
-app.listen(PORT);
-console.log(`The server is running on ${PORT} port`);
+app.listen(port);
+console.log(`The server is running on ${port} port`);

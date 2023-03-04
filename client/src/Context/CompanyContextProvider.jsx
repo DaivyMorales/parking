@@ -1,17 +1,21 @@
-import { createContext, useState } from "react";
+import { createContext, useEffect, useState } from "react";
 import {
   getVehiclesRequest,
   deleteVehicleRequest,
   createVehicleRequest,
   getVehicleRequest,
   updateVehicleRequest,
+  getProductVehicleRequest,
 } from "../api/vehicle.api";
 
 export const CompanyContext = createContext();
 
 export const CompanyContextProvider = ({ children }) => {
   const [vehicles, setVehicles] = useState([]);
+  const [vehicleCompleted, setVehicleCompleted] = useState([]);
   const [form, setForm] = useState(false);
+
+  const [horaActual, setHoraActual] = useState(new Date());
 
   const loadVehicles = async () => {
     const response = await getVehiclesRequest();
@@ -43,6 +47,16 @@ export const CompanyContextProvider = ({ children }) => {
     // console.log("Update", response.data.updatedAt !==);
   };
 
+  const updateFilter = (newVehicle) => {
+    setVehicleCompleted([...vehicleCompleted, newVehicle]);
+  };
+
+  const loadProductsVehicles = async (product) => {
+    const response = await getProductVehicleRequest(product);
+    setVehicles(response.data);
+  };
+
+
   return (
     <CompanyContext.Provider
       value={{
@@ -55,6 +69,12 @@ export const CompanyContextProvider = ({ children }) => {
         createVehicle,
         loadVehicle,
         updateVehicles,
+        loadProductsVehicles,
+        horaActual,
+        setHoraActual,
+        vehicleCompleted,
+        setVehicleCompleted,
+        updateFilter,
       }}
     >
       {children}

@@ -57,3 +57,14 @@ export const productFilter = async (req, res) => {
     res.status(500).json({ message: error });
   }
 };
+
+// export const dateFilter = async (req, res) => {
+//   try {
+//     const vehicle = await Vehicle.find({
+//       product: req.params.vehicleDate,
+//     });
+//     res.status(200).json(vehicle);
+//   } catch (error) {
+//     res.status(500).json({ message: error });
+//   }
+// };
