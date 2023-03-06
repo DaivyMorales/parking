@@ -14,7 +14,9 @@ export const Vehicle = ({ vehicle }) => {
     updateFilter,
   } = useContext(CompanyContext);
 
-  const [date, setDate] = useState(new Date(vehicle.createdAt));
+  const createdAt = new Date(vehicle.createdAt);
+  const newDate = new Date(createdAt.getTime() + 5 * 60 * 60 * 1000);
+  const [date, setDate] = useState(newDate);
 
   const duration = horaActual - date;
 
@@ -74,13 +76,17 @@ export const Vehicle = ({ vehicle }) => {
     return () => clearInterval(intervalo);
   }, []);
 
+  const colorPrice = {
+    backgroundColor: "gray",
+  };
+
   // console.log(vehicle.name, date.toLocaleString());
 
   return (
-    <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+    <tr className="bg-white shadow-xl dark:bg-gray-800 dark:border-gray-700">
       <th
         scope="row"
-        className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
+        className="px-6 py-4 font-bold text-gray-900 whitespace-nowrap dark:text-white"
       >
         {vehicle.plates}
       </th>
@@ -89,7 +95,14 @@ export const Vehicle = ({ vehicle }) => {
       <td className="px-6 py-4">{vehicle.product}</td>
       <td className="px-6 py-4">{date.toLocaleString()}</td>
       <td className="px-6 py-4">{calcularTiempoTranscurrido(duration)}</td>
-      <td className="px-6 py-4">${calcularPrecioDuracion(duration)}</td>
+      <td className="px-6 py-4 font-bold ">
+        <div
+          style={calcularPrecioDuracion(duration) > 0 ? null : colorPrice}
+          className="bg-[#09c212] p-2 rounded-full flex justify-center text-white text-xs"
+        >
+          ${calcularPrecioDuracion(duration)}
+        </div>
+      </td>
       <td className="px-6 py-4 text-right">
         <a
           onClick={() => {
@@ -99,7 +112,7 @@ export const Vehicle = ({ vehicle }) => {
           href="#"
           className="font-medium text-red-600 dark:text-blue-500 hover:underline"
         >
-          Eliminar
+          Pago
         </a>
         <br />
         <a

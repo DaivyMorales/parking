@@ -17,3 +17,8 @@ export const updateVehicleRequest = async (id, newFields) =>
 
 export const getProductVehicleRequest = async (product) =>
   await axios.get(`http://localhost:3000/vehicles/products/${product}`);
+
+export const getDateRequest = async (startDate, endDate) =>
+  await axios.get(
+    `http://localhost:3000/vehicles/date/${startDate}/${endDate}`
+  );

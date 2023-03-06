@@ -6,6 +6,7 @@ import {
   getVehicleRequest,
   updateVehicleRequest,
   getProductVehicleRequest,
+  getDateRequest,
 } from "../api/vehicle.api";
 
 export const CompanyContext = createContext();
@@ -56,6 +57,10 @@ export const CompanyContextProvider = ({ children }) => {
     setVehicles(response.data);
   };
 
+  const getDate = async (startDate, endDate) => {
+    const response = await getDateRequest(startDate, endDate);
+    setVehicles(response.data);
+  };
 
   return (
     <CompanyContext.Provider
@@ -75,6 +80,7 @@ export const CompanyContextProvider = ({ children }) => {
         vehicleCompleted,
         setVehicleCompleted,
         updateFilter,
+        getDate,
       }}
     >
       {children}

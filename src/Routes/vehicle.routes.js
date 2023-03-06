@@ -6,6 +6,7 @@ import {
   updateVehicles,
   createVehicles,
   productFilter,
+  dateFilter
 } from "../Controllers/vehicle.controller.js";
 
 const router = Router();
@@ -17,6 +18,6 @@ router.put("/:vehicleId", updateVehicles);
 router.delete("/:vehicleId", deleteVehicles);
 
 router.get("/products/:vehicleProduct", productFilter);
-// router.get("/products/:vehicleDate", dateFilter)
+router.get("/date/:startDate/:endDate", dateFilter)
 
 export default router;

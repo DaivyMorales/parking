@@ -4,9 +4,13 @@
 
 :root {
   font-family: "Inter", sans-serif;
+  background-color: white;
 }
-
 
 label{
   @apply font-medium text-sm;
+}
+
+h3{
+    @apply font-bold;
 }

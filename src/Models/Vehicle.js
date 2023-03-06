@@ -1,5 +1,8 @@
 import { Schema, model } from "mongoose";
 
+//America/Bogotá
+process.env.TZ = "America/Bogota";
+
 const vehicleSchema = new Schema(
   {
     plates: String,
@@ -12,7 +15,7 @@ const vehicleSchema = new Schema(
     },
   },
   {
-    timestamps: true,
+    timestamps: { currentTime: () => new Date().getTime() - (5 * 60 * 60 * 1000) },
     versionKey: false,
   }
 );
